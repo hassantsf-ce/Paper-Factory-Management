@@ -18,15 +18,15 @@ public class ScannerWrapper {
     return scanner.nextInt();
   }
 
-  public static String getString() {
+  public String getString() {
     return scanner.next();
   }
 
-  public static double getDouble() {
+  public double getDouble() {
     return scanner.nextDouble();
   }
 
-  public static double getLong() {
+  public long getLong() {
     return scanner.nextLong();
   }
 }
