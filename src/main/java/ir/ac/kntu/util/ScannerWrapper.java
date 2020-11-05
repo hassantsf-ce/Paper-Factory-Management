@@ -2,7 +2,7 @@ package ir.ac.kntu.util;
 
 import java.util.Scanner;
 
-public class ScannerWrapper {
+class ScannerWrapper {
   private static Scanner scanner;
   private static final ScannerWrapper scannerWrapper = new ScannerWrapper();
 
