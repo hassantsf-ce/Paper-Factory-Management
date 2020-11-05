@@ -1,4 +1,4 @@
-package ir.ac.kntu;
+package ir.ac.kntu.model;
 
 public class Customer {
   private String name;

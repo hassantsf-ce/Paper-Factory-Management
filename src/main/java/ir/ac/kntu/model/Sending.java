@@ -1,5 +1,8 @@
-package ir.ac.kntu;
+package ir.ac.kntu.model;
 
+import ir.ac.kntu.model.Branch;
+import ir.ac.kntu.model.City;
+import ir.ac.kntu.model.Customer;
 import ir.ac.kntu.util.JalaliCalendar;
 
 public class Sending {
