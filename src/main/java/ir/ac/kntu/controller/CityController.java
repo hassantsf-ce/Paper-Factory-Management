@@ -2,8 +2,7 @@ package ir.ac.kntu.controller;
 
 import ir.ac.kntu.exceptions.CanNotInstantiateException;
 import ir.ac.kntu.model.City;
-import ir.ac.kntu.util.CityValidation;
-import ir.ac.kntu.util.PrimaryValidation;
+import ir.ac.kntu.util.validation.CityValidation;
 import ir.ac.kntu.util.UserInput;
 
 public class CityController implements Controller<City> {

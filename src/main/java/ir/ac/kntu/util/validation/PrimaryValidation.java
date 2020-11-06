@@ -1,4 +1,4 @@
-package ir.ac.kntu.util;
+package ir.ac.kntu.util.validation;
 
 import ir.ac.kntu.exceptions.EmptyStringException;
 import ir.ac.kntu.exceptions.NegativeValueException;
