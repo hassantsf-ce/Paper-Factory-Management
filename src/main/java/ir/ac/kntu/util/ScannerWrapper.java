@@ -1,10 +1,13 @@
 package ir.ac.kntu.util;
 
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.Scanner;
 
-class ScannerWrapper {
+public class ScannerWrapper {
   private static Scanner scanner;
-  private static final ScannerWrapper scannerWrapper = new ScannerWrapper();
+  private static ScannerWrapper scannerWrapper = new ScannerWrapper();
 
   private ScannerWrapper() {
     scanner = new Scanner(System.in);
@@ -12,6 +15,12 @@ class ScannerWrapper {
 
   public static ScannerWrapper getInstance() {
     return scannerWrapper;
+  }
+
+  public static void setIn(String text) {
+    InputStream stream = new ByteArrayInputStream(text.getBytes());
+    System.setIn(stream);
+    scannerWrapper = new ScannerWrapper();
   }
 
   public int getInt() {
@@ -28,5 +37,9 @@ class ScannerWrapper {
 
   public long getLong() {
     return scanner.nextLong();
+  }
+
+  public String getLine() {
+    return scanner.nextLine();
   }
 }

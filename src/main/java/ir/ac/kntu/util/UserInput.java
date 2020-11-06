@@ -26,4 +26,10 @@ public class UserInput {
     double input = SCANNER.getDouble();
     return input;
   }
+
+  public String getLine(String fieldName) {
+    System.out.println("Enter " + fieldName + ":");
+    String input = SCANNER.getLine();
+    return input;
+  }
 }
