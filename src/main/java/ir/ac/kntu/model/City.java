@@ -32,9 +32,9 @@ public class City {
 
   @Override
   public String toString() {
-    return "City: " +
-            "\n-name: " + name +
-            "\n-state: " + state;
+    return "City {" +
+            "\n\t\t-name: " + name +
+            "\n\t\t-state: " + state + "\n\t\t}";
   }
 
   @Override

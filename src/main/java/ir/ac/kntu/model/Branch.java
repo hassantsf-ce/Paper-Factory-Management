@@ -42,9 +42,9 @@ public class Branch {
 
   @Override
   public String toString() {
-    return "Branch: " + code  +
-            "\n-" + city +
-            "\n-personnelNumbers: " + personnelNumbers;
+    return "Branch " + code  + " [" +
+            "\n\t" + city +
+            "\n\t-personnelNumbers: " + personnelNumbers + "\n]";
   }
 
   @Override

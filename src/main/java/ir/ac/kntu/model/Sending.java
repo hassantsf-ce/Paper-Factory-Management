@@ -135,4 +135,18 @@ public class Sending {
   public int hashCode() {
     return Objects.hash(name, sender, receiver, branch, origin, destination, weight, sendTime, receiveTime, methods);
   }
+
+  @Override
+  public String toString() {
+    return "Sending " + name +
+            "\nsender: " + sender +
+            "\nreceiver: " + receiver +
+            "\nbranch: " + branch +
+            "\norigin: " + origin +
+            "\ndestination: " + destination +
+            "\nweight: " + weight +
+            "\nsendTime: " + sendTime +
+            "\nreceiveTime: " + receiveTime +
+            "\nmethods: " + methods;
+  }
 }

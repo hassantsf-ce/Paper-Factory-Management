@@ -7,7 +7,8 @@ public class Customer {
   private String nationalNumber;
 
   // Default Constructor for jackson
-  public Customer() {}
+  public Customer() {
+  }
 
   public Customer(String name, String nationalNumber) {
     this.name = name;
@@ -33,8 +34,8 @@ public class Customer {
 
   @Override
   public String toString() {
-    return "Customer " + nationalNumber +
-            "\n-name: " + name;
+    return "Customer " + nationalNumber + " {" +
+            "\n\t- name: " + name + "\n}";
   }
 
   @Override
