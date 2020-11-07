@@ -1,6 +1,8 @@
 package ir.ac.kntu.util;
 
 
+import ir.ac.kntu.model.DateModel;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
@@ -442,6 +444,10 @@ public class JalaliCalendar {
     public int getDay() {
       return day;
     }
+  }
+
+  public DateModel getModel() {
+    return new DateModel(year, month, day);
   }
 }
 
