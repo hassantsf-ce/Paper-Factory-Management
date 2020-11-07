@@ -1,10 +1,10 @@
 package ir.ac.kntu.dao;
 
-import java.util.ArrayList;
+import java.util.List;
 
 interface Dao<T> {
-  void updateItems(ArrayList<T> items);
-  ArrayList<T> getItems();
+  void updateItems(List<T> items);
+  List<T> getItems();
   T getItem(int id);
   T deleteItem(int id);
 }

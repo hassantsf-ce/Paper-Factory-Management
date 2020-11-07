@@ -1,24 +1,25 @@
 package ir.ac.kntu.dao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ir.ac.kntu.dao.Dao;
 import ir.ac.kntu.model.Sending;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class SendingDao implements Dao<Sending> {
-  private final String dbPath = "src\\main\\java\\ir\\ac\\kntu\\db\\sending.json";
   private File db;
+  private ObjectMapper mapper;
 
   public SendingDao() {
+    String dbPath = "src\\main\\java\\ir\\ac\\kntu\\db\\sending.json";
+    mapper =  new ObjectMapper();
     db = new File(dbPath);
   }
 
   @Override
-  public void updateItems(ArrayList<Sending> items) {
-    ObjectMapper mapper = new ObjectMapper();
+  public void updateItems(List<Sending> items) {
     try {
       mapper.writeValue(db, items);
     } catch (IOException e) {
@@ -27,7 +28,14 @@ public class SendingDao implements Dao<Sending> {
   }
 
   @Override
-  public ArrayList<Sending> getItems() {
+  public List<Sending> getItems() {
+    try {
+      Sending[] sendingArray = mapper.readValue(db, Sending[].class);
+      List<Sending> sendingList = Arrays.asList(sendingArray);
+      return sendingList;
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     return null;
   }
 
