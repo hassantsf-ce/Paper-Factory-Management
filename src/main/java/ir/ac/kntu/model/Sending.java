@@ -14,6 +14,20 @@ public class Sending {
   private double weight;
   private JalaliCalendar sendTime;
   private JalaliCalendar receiveTime;
+  private SendingMethods methods;
+
+  public Sending(String name, Customer sender, Customer receiver, Branch branch, City origin, City destination, double weight, JalaliCalendar sendTime, JalaliCalendar receiveTime, SendingMethods methods) {
+    this.name = name;
+    this.sender = sender;
+    this.receiver = receiver;
+    this.branch = branch;
+    this.origin = origin;
+    this.destination = destination;
+    this.weight = weight;
+    this.sendTime = sendTime;
+    this.receiveTime = receiveTime;
+    this.methods = methods;
+  }
 
   public String getName() {
     return name;
@@ -51,18 +65,8 @@ public class Sending {
     return receiveTime;
   }
 
-  @Override
-  public String toString() {
-    return "Sending: " + name +
-            "\n-sender=" + sender +
-            "\n-receiver=" + receiver +
-            "\n-branch=" + branch +
-            "\n-origin=" + origin +
-            "\n-destination=" + destination +
-            "\n-weight=" + weight +
-            "\n-send time=" + sendTime +
-            "\n-receive time=" + receiveTime +
-            '}';
+  public SendingMethods getMethods() {
+    return methods;
   }
 
   @Override
@@ -78,11 +82,12 @@ public class Sending {
             Objects.equals(origin, sending.origin) &&
             Objects.equals(destination, sending.destination) &&
             Objects.equals(sendTime, sending.sendTime) &&
-            Objects.equals(receiveTime, sending.receiveTime);
+            Objects.equals(receiveTime, sending.receiveTime) &&
+            Objects.equals(methods, sending.methods);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, sender, receiver, branch, origin, destination, weight, sendTime, receiveTime);
+    return Objects.hash(name, sender, receiver, branch, origin, destination, weight, sendTime, receiveTime, methods);
   }
 }
