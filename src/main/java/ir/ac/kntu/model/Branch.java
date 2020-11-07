@@ -7,6 +7,9 @@ public class Branch {
   private City city;
   private int personnelNumbers;
 
+  // Default Constructor for jackson
+  public Branch() {}
+
   public Branch(String code, City city, int personnelNumbers) {
     this.code = code;
     this.city = city;
@@ -23,6 +26,18 @@ public class Branch {
 
   public int getPersonnelNumbers() {
     return personnelNumbers;
+  }
+
+  public void setCode(String code) {
+    this.code = code;
+  }
+
+  public void setCity(City city) {
+    this.city = city;
+  }
+
+  public void setPersonnelNumbers(int personnelNumbers) {
+    this.personnelNumbers = personnelNumbers;
   }
 
   @Override

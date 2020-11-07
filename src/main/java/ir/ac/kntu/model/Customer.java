@@ -6,6 +6,9 @@ public class Customer {
   private String name;
   private String nationalNumber;
 
+  // Default Constructor for jackson
+  public Customer() {}
+
   public Customer(String name, String nationalNumber) {
     this.name = name;
     this.nationalNumber = nationalNumber;
@@ -18,6 +21,15 @@ public class Customer {
   public String getNationalNumber() {
     return nationalNumber;
   }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setNationalNumber(String nationalNumber) {
+    this.nationalNumber = nationalNumber;
+  }
+
 
   @Override
   public String toString() {

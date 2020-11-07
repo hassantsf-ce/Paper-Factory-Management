@@ -12,11 +12,15 @@ public class Sending {
   private City origin;
   private City destination;
   private double weight;
-  private JalaliCalendar sendTime;
-  private JalaliCalendar receiveTime;
+  private DateModel sendTime;
+  private DateModel receiveTime;
   private SendingMethods methods;
 
-  public Sending(String name, Customer sender, Customer receiver, Branch branch, City origin, City destination, double weight, JalaliCalendar sendTime, JalaliCalendar receiveTime, SendingMethods methods) {
+  // Default Constructor for jackson
+  public Sending() {
+  }
+
+  public Sending(String name, Customer sender, Customer receiver, Branch branch, City origin, City destination, double weight, DateModel sendTime, DateModel receiveTime, SendingMethods methods) {
     this.name = name;
     this.sender = sender;
     this.receiver = receiver;
@@ -57,16 +61,57 @@ public class Sending {
     return weight;
   }
 
-  public JalaliCalendar getSendTime() {
+  public DateModel getSendTime() {
     return sendTime;
   }
 
-  public JalaliCalendar getReceiveTime() {
+  public DateModel getReceiveTime() {
     return receiveTime;
   }
 
   public SendingMethods getMethods() {
     return methods;
+  }
+
+  // Setters
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setSender(Customer sender) {
+    this.sender = sender;
+  }
+
+  public void setReceiver(Customer receiver) {
+    this.receiver = receiver;
+  }
+
+  public void setBranch(Branch branch) {
+    this.branch = branch;
+  }
+
+  public void setOrigin(City origin) {
+    this.origin = origin;
+  }
+
+  public void setDestination(City destination) {
+    this.destination = destination;
+  }
+
+  public void setWeight(double weight) {
+    this.weight = weight;
+  }
+
+  public void setSendTime(DateModel sendTime) {
+    this.sendTime = sendTime;
+  }
+
+  public void setReceiveTime(DateModel receiveTime) {
+    this.receiveTime = receiveTime;
+  }
+
+  public void setMethods(SendingMethods methods) {
+    this.methods = methods;
   }
 
   @Override

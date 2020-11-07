@@ -9,6 +9,9 @@ public class SendingMethods {
   private SendMethod method;
   private SendingStatus status;
 
+  // Default Constructor for jackson
+  public SendingMethods() {}
+
   public SendingMethods(PostType type, SendMethod method, SendingStatus status) {
     this.type = type;
     this.method = method;
@@ -25,6 +28,18 @@ public class SendingMethods {
 
   public SendMethod getMethod() {
     return method;
+  }
+
+  public void setType(PostType type) {
+    this.type = type;
+  }
+
+  public void setMethod(SendMethod method) {
+    this.method = method;
+  }
+
+  public void setStatus(SendingStatus status) {
+    this.status = status;
   }
 
   @Override
