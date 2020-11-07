@@ -5,6 +5,7 @@ import ir.ac.kntu.util.JalaliCalendar;
 import java.util.Objects;
 
 public class Sending {
+  private int id;
   private String name;
   private Customer sender;
   private Customer receiver;
@@ -31,6 +32,10 @@ public class Sending {
     this.sendTime = sendTime;
     this.receiveTime = receiveTime;
     this.methods = methods;
+  }
+
+  public int getId() {
+    return id;
   }
 
   public String getName() {
@@ -74,6 +79,10 @@ public class Sending {
   }
 
   // Setters
+  public void setId(int id) {
+    this.id = id;
+  }
+
   public void setName(String name) {
     this.name = name;
   }
@@ -138,7 +147,8 @@ public class Sending {
 
   @Override
   public String toString() {
-    return "Sending " + name +
+    return "Sending " + id +
+            "\nname: " + name +
             "\nsender: " + sender +
             "\nreceiver: " + receiver +
             "\nbranch: " + branch +

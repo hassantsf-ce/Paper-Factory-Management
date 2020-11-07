@@ -41,6 +41,12 @@ public class SendingDao implements Dao<Sending> {
 
   @Override
   public Sending getItem(int id) {
+    for (Sending sending :
+            this.getItems()) {
+      if (sending.getId() == id) {
+        return sending;
+      }
+    }
     return null;
   }
 
