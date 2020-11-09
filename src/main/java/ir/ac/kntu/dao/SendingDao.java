@@ -40,7 +40,8 @@ public class SendingDao implements Dao<Sending> {
   }
 
   @Override
-  public Sending getItem(int id) {
+  public Sending getItem(String stringId) {
+    int id = Integer.parseInt(stringId);
     for (Sending sending :
             this.getItems()) {
       if (sending.getId() == id) {
@@ -51,7 +52,7 @@ public class SendingDao implements Dao<Sending> {
   }
 
   @Override
-  public Sending deleteItem(int id) {
+  public Sending deleteItem(String stringId) {
     return null;
   }
 }
