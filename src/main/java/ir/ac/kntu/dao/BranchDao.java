@@ -8,29 +8,17 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-public class BranchDao implements Dao<Branch> {
-  private File db;
-  private ObjectMapper mapper;
-
+public class BranchDao extends Dao<Branch> {
   public BranchDao() {
     String dbPath = "src\\main\\java\\ir\\ac\\kntu\\db\\branches.json";
-    mapper = new ObjectMapper();
-    db = new File(dbPath);
-  }
-
-  @Override
-  public void updateItems(List<Branch> items) {
-    try {
-      mapper.writeValue(db, items);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    setMapper(new ObjectMapper());
+    setDb(new File(dbPath));
   }
 
   @Override
   public List<Branch> getItems() {
     try {
-      Branch[] customersArray = mapper.readValue(db, Branch[].class);
+      Branch[] customersArray = getMapper().readValue(getDb(), Branch[].class);
       List<Branch> sendingList = Arrays.asList(customersArray);
       return sendingList;
     } catch (IOException e) {

@@ -1,10 +1,40 @@
 package ir.ac.kntu.dao;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
-interface Dao<T> {
-  void updateItems(List<T> items);
-  List<T> getItems();
-  T getItem(String id);
-  T deleteItem(String id);
+abstract class Dao<T> {
+  private File db;
+  private ObjectMapper mapper;
+
+  public void setDb(File db) {
+    this.db = db;
+  }
+
+  public void setMapper(ObjectMapper mapper) {
+    this.mapper = mapper;
+  }
+
+  public ObjectMapper getMapper() {
+    return mapper;
+  }
+
+  public File getDb() {
+    return db;
+  }
+
+  public void updateItems(List<T> items) {
+    try {
+      mapper.writeValue(db, items);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  abstract List<T> getItems();
+  abstract T getItem(String id);
+  abstract T deleteItem(String id);
 }

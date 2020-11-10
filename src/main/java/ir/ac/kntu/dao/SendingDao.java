@@ -8,29 +8,17 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-public class SendingDao implements Dao<Sending> {
-  private File db;
-  private ObjectMapper mapper;
-
+public class SendingDao extends Dao<Sending> {
   public SendingDao() {
     String dbPath = "src\\main\\java\\ir\\ac\\kntu\\db\\sending.json";
-    mapper =  new ObjectMapper();
-    db = new File(dbPath);
-  }
-
-  @Override
-  public void updateItems(List<Sending> items) {
-    try {
-      mapper.writeValue(db, items);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    setMapper(new ObjectMapper());
+    setDb(new File(dbPath));
   }
 
   @Override
   public List<Sending> getItems() {
     try {
-      Sending[] sendingArray = mapper.readValue(db, Sending[].class);
+      Sending[] sendingArray = getMapper().readValue(getDb(), Sending[].class);
       List<Sending> sendingList = Arrays.asList(sendingArray);
       return sendingList;
     } catch (IOException e) {
