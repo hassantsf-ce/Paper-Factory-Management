@@ -12,21 +12,16 @@ import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-public class CustomerDaoTest extends DaoTest {
-  private Dao<Customer> dao;
-  String jsonTests[];
-  File jsonTest;
-
-
+public class CustomerDaoTest extends DaoTest<Customer> {
   @Before
   public void init() {
-    jsonTests = new String[2];
+    String[] jsonTests = new String[2];
     jsonTests[0] = "src\\test\\java\\ir\\ac\\kntu\\db\\customers1.json";
     jsonTests[1] = "src\\test\\java\\ir\\ac\\kntu\\db\\customers2.json";
-    dao = new CustomerDao();
-    jsonTest = new File("src\\test\\java\\ir\\ac\\kntu\\db\\test.json");
+    setJsonTests(jsonTests);
+    setDao(new CustomerDao());
+    setJsonTest(new File("src\\test\\java\\ir\\ac\\kntu\\db\\test.json"));
   }
 
   @Test
@@ -39,10 +34,10 @@ public class CustomerDaoTest extends DaoTest {
     customers.add(customer1);
     customers.add(customer2);
     customers.add(customer3);
-    String expected = getJsonFromFile(jsonTests[0]);
-    dao.setDb(jsonTest);
-    dao.updateItems(customers);
-    String actual = getJsonFromFile(jsonTest.getPath());
+    String expected = getJsonFromFile(getJsonTests()[0]);
+    getDao().setDb(getJsonTest());
+    getDao().updateItems(customers);
+    String actual = getJsonFromFile(getJsonTest().getPath());
     assertEquals(expected, actual);
 
     // Test 2
@@ -53,23 +48,26 @@ public class CustomerDaoTest extends DaoTest {
     customers.add(customer1);
     customers.add(customer2);
     customers.add(customer3);
-    expected = getJsonFromFile(jsonTests[1]);
-    dao.setDb(jsonTest);
-    dao.updateItems(customers);
-    actual = getJsonFromFile(jsonTest.getPath());
+    expected = getJsonFromFile(getJsonTests()[1]);
+    getDao().setDb(getJsonTest());
+    getDao().updateItems(customers);
+    actual = getJsonFromFile(getJsonTest().getPath());
     assertEquals(expected, actual);
   }
 
   @Test
   public void getItemTest() {
+    Dao<Customer> dao = getDao();
+    String[] jsonTests = getJsonTests();
+
     Customer expected = new Customer("Ali", "0392358441");
-    dao.setDb(new File(jsonTests[0]));
-    Customer actual = dao.getItem("0392358441");
+    getDao().setDb(new File(jsonTests[0]));
+    Customer actual = getDao().getItem("0392358441");
     assertEquals(expected, actual);
 
     // Test 2
     expected = new Customer("Sara", "0838753211");
-    dao.setDb(new File(jsonTests[0]));
+    getDao().setDb(new File(jsonTests[0]));
     actual = dao.getItem("0838753211");
     // Test for case insensitivity
     assertEquals(expected, actual);
@@ -83,6 +81,8 @@ public class CustomerDaoTest extends DaoTest {
 
   @Test
   public void getItemsTest() {
+    Dao<Customer> dao = getDao();
+    String[] jsonTests = getJsonTests();
     // Test 1
     Customer customer1 = new Customer("Hassan", "3132934138");
     Customer customer2 = new Customer("Ali", "0392358441");

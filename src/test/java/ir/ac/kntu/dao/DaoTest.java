@@ -6,14 +6,36 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.util.Scanner;
 
-public abstract class DaoTest {
-  private Dao<Customer> dao;
-  String jsonTests[];
-  File jsonTest;
+public abstract class DaoTest<T> {
+  private Dao<T> dao;
+  private String jsonTests[];
+  private File jsonTest;
 
+  public void setDao(Dao<T> dao) {
+    this.dao = dao;
+  }
+
+  public void setJsonTests(String[] jsonTests) {
+    this.jsonTests = jsonTests;
+  }
+
+  public void setJsonTest(File jsonTest) {
+    this.jsonTest = jsonTest;
+  }
+
+  public Dao<T> getDao() {
+    return dao;
+  }
+
+  public File getJsonTest() {
+    return jsonTest;
+  }
+
+  public String[] getJsonTests() {
+    return jsonTests;
+  }
 
   @Before
   public abstract void init();

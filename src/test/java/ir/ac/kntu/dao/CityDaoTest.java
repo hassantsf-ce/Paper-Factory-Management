@@ -14,39 +14,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class CityDaoTest {
-  private Dao<City> dao;
-  String jsonTests[];
-  File jsonTest;
-
-
+public class CityDaoTest extends DaoTest<City> {
   @Before
   public void init() {
-    jsonTests = new String[2];
+    String[] jsonTests = new String[2];
     jsonTests[0] = "src\\test\\java\\ir\\ac\\kntu\\db\\cities1.json";
     jsonTests[1] = "src\\test\\java\\ir\\ac\\kntu\\db\\cities2.json";
-    dao = new CityDao();
-    jsonTest = new File("src\\test\\java\\ir\\ac\\kntu\\db\\test.json");
-  }
-
-  private String getJsonFromFile(String path) {
-    try (Scanner scanner = new Scanner(new File(path)); RandomAccessFile accessFile = new RandomAccessFile(jsonTest, "rw")) {
-      StringBuilder json = new StringBuilder();
-
-      while (scanner.hasNextLine()) {
-        json.append(scanner.nextLine());
-      }
-
-      return json.toString().replaceAll("\\s", "");
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
-    return null;
+    setJsonTests(jsonTests);
+    setDao(new CityDao());
+    setJsonTest(new File("src\\test\\java\\ir\\ac\\kntu\\db\\test.json"));
   }
 
   @Test
   public void updateItemsTest() {
+    Dao<City> dao = getDao();
+    String[] jsonTests = getJsonTests();
+    File jsonTest = getJsonTest();
+
     City city1 = new City("Qom", "Qom");
     City city2 = new City("Tehran", "Tehran");
     City city3 = new City("Sari", "Mazandaran");
@@ -77,6 +61,9 @@ public class CityDaoTest {
 
   @Test
   public void getItemTest() {
+    Dao<City> dao = getDao();
+    String[] jsonTests = getJsonTests();
+
     City expected = new City("Los Angles", "California");
     dao.setDb(new File(jsonTests[1]));
     City actual = dao.getItem("Los Angles");
@@ -98,6 +85,9 @@ public class CityDaoTest {
 
   @Test
   public void getItemsTest() {
+    Dao<City> dao = getDao();
+    String[] jsonTests = getJsonTests();
+
     // Test 1
     City city1 = new City("Qom", "Qom");
     City city2 = new City("Tehran", "Tehran");
