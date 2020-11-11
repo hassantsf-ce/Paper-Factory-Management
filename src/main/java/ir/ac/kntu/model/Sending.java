@@ -1,7 +1,5 @@
 package ir.ac.kntu.model;
 
-import ir.ac.kntu.util.JalaliCalendar;
-
 import java.util.Objects;
 
 public class Sending {

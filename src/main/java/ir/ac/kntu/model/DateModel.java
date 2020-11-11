@@ -1,14 +1,17 @@
 package ir.ac.kntu.model;
 
+import ir.ac.kntu.view.ViewAsHtml;
+
 import java.util.Objects;
 
-public class DateModel {
+public class DateModel implements ViewAsHtml {
   private int year;
   private int month;
   private int day;
 
   // Default Constructor for jackson
-  public DateModel() {}
+  public DateModel() {
+  }
 
   public DateModel(int year, int month, int day) {
     this.year = year;
@@ -58,5 +61,10 @@ public class DateModel {
   @Override
   public int hashCode() {
     return Objects.hash(year, month, day);
+  }
+
+  @Override
+  public String generateHtml() {
+    return "<td>" + year + "/" + month + "/" + day + "</td>";
   }
 }

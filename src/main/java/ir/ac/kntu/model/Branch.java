@@ -1,14 +1,17 @@
 package ir.ac.kntu.model;
 
+import ir.ac.kntu.view.ViewAsHtml;
+
 import java.util.Objects;
 
-public class Branch {
+public class Branch implements ViewAsHtml {
   private String code;
   private City city;
   private int personnelNumbers;
 
   // Default Constructor for jackson
-  public Branch() {}
+  public Branch() {
+  }
 
   public Branch(String code, City city, int personnelNumbers) {
     this.code = code;
@@ -42,7 +45,7 @@ public class Branch {
 
   @Override
   public String toString() {
-    return "Branch " + code  + " [" +
+    return "Branch " + code + " [" +
             "\n\t" + city +
             "\n\t-personnelNumbers: " + personnelNumbers + "\n]";
   }
@@ -60,5 +63,10 @@ public class Branch {
   @Override
   public int hashCode() {
     return Objects.hash(code, city, personnelNumbers);
+  }
+
+  @Override
+  public String generateHtml() {
+    return "<td>Branch " + code + " from " + city.getName() + "</td>";
   }
 }

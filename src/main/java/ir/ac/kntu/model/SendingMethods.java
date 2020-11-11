@@ -3,14 +3,16 @@ package ir.ac.kntu.model;
 import ir.ac.kntu.enums.PostType;
 import ir.ac.kntu.enums.SendMethod;
 import ir.ac.kntu.enums.SendingStatus;
+import ir.ac.kntu.view.ViewAsHtml;
 
-public class SendingMethods {
+public class SendingMethods implements ViewAsHtml {
   private PostType type;
   private SendMethod method;
   private SendingStatus status;
 
   // Default Constructor for jackson
-  public SendingMethods() {}
+  public SendingMethods() {
+  }
 
   public SendingMethods(PostType type, SendMethod method, SendingStatus status) {
     this.type = type;
@@ -49,5 +51,12 @@ public class SendingMethods {
             "\n\tmethod = " + method +
             "\n\tstatus = " + status +
             "\n}";
+  }
+
+  @Override
+  public String generateHtml() {
+    return "<td>" + type + "</td>"
+            + "<td>" + method + "</td>"
+            + "<td>" + status + "</td>";
   }
 }

@@ -1,8 +1,10 @@
 package ir.ac.kntu.model;
 
+import ir.ac.kntu.view.ViewAsHtml;
+
 import java.util.Objects;
 
-public class Customer {
+public class Customer implements ViewAsHtml {
   private String name;
   private String nationalNumber;
 
@@ -50,5 +52,10 @@ public class Customer {
   @Override
   public int hashCode() {
     return Objects.hash(name, nationalNumber);
+  }
+
+  @Override
+  public String generateHtml() {
+    return "<td>Customer " + name + "(" + nationalNumber + ")" + "</td>";
   }
 }

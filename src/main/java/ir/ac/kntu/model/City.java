@@ -1,8 +1,10 @@
 package ir.ac.kntu.model;
 
+import ir.ac.kntu.view.ViewAsHtml;
+
 import java.util.Objects;
 
-public class City {
+public class City implements ViewAsHtml {
   private String name;
   private String state;
 
@@ -49,5 +51,9 @@ public class City {
   @Override
   public int hashCode() {
     return Objects.hash(name, state);
+  }
+
+  public String generateHtml() {
+    return "<td>City " + name + "(" + state + ")" + "</td>";
   }
 }
