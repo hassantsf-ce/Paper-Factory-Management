@@ -21,7 +21,8 @@ public class Sending {
   public Sending() {
   }
 
-  public Sending(String name, Customer sender, Customer receiver, Branch branch, City origin, City destination, double weight, DateModel sendTime, DateModel receiveTime, SendingMethods methods) {
+  public Sending(int id, String name, Customer sender, Customer receiver, Branch branch, City origin, City destination, double weight, DateModel sendTime, DateModel receiveTime, SendingMethods methods) {
+    this.id = id;
     this.name = name;
     this.sender = sender;
     this.receiver = receiver;
@@ -128,21 +129,14 @@ public class Sending {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Sending sending = (Sending) o;
-    return Double.compare(sending.weight, weight) == 0 &&
-            Objects.equals(name, sending.name) &&
-            Objects.equals(sender, sending.sender) &&
-            Objects.equals(receiver, sending.receiver) &&
-            Objects.equals(branch, sending.branch) &&
-            Objects.equals(origin, sending.origin) &&
-            Objects.equals(destination, sending.destination) &&
-            Objects.equals(sendTime, sending.sendTime) &&
-            Objects.equals(receiveTime, sending.receiveTime) &&
-            Objects.equals(methods, sending.methods);
+    return id == sending.id &&
+            Double.compare(sending.weight, weight) == 0 &&
+            Objects.equals(name, sending.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, sender, receiver, branch, origin, destination, weight, sendTime, receiveTime, methods);
+    return Objects.hash(id, name);
   }
 
   @Override

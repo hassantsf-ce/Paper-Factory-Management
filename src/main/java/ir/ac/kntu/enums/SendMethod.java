@@ -1,7 +1,7 @@
 package ir.ac.kntu.enums;
 
 public enum SendMethod {
-  Air_MAIL,
-  Ground_MAIL,
+  AIR_MAIL,
+  GROUND_MAIL,
   SEA_MAIL
 }
