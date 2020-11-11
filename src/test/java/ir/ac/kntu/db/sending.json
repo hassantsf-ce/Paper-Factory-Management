@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1,
+    "name": "phone",
+    "sender": {
+      "name": "Hassan",
+      "nationalNumber": "3132934138"
+    },
+    "receiver": {
+      "name": "Ali",
+      "nationalNumber": "0392358441"
+    },
+    "branch": {
+      "code": "1234",
+      "city": {
+        "name": "Qom",
+        "state": "Qom"
+      },
+      "personnelNumbers": 1200
+    },
+    "origin": {
+      "name": "Qom",
+      "state": "Qom"
+    },
+    "destination": {
+      "name": "Tehran",
+      "state": "Tehran"
+    },
+    "weight": 2.3,
+    "sendTime": {
+      "year": 1399,
+      "month": 8,
+      "day": 14
+    },
+    "receiveTime": {
+      "year": 1399,
+      "month": 8,
+      "day": 17
+    },
+    "methods": {
+      "type": "ORDINARY",
+      "method": "AIR_MAIL",
+      "status": "POSTED"
+    }
+  },
+  {
+    "id": 2,
+    "name": "1984 Book",
+    "sender": {
+      "name": "Sara",
+      "nationalNumber": "0838753211"
+    },
+    "receiver": {
+      "name": "Hassan",
+      "nationalNumber": "3132934138"
+    },
+    "branch": {
+      "code": "9823",
+      "city": {
+        "name": "Los Angles",
+        "state": "California"
+      },
+      "personnelNumbers": 814
+    },
+    "origin": {
+      "name": "NewYork City",
+      "state": "NewYork"
+    },
+    "destination": {
+      "name": "Los Angles",
+      "state": "California"
+    },
+    "weight": 0.8,
+    "sendTime": {
+      "year": 1399,
+      "month": 6,
+      "day": 20
+    },
+    "receiveTime": {
+      "year": 1399,
+      "month": 6,
+      "day": 22
+    },
+    "methods": {
+      "type": "CERTIFIED",
+      "method": "SEA_MAIL",
+      "status": "STORED"
+    }
+  }
+]

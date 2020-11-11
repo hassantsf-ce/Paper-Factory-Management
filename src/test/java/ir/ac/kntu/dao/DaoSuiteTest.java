@@ -7,7 +7,8 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         CityDaoTest.class,
         CustomerDaoTest.class,
-        BranchDaoTest.class
+        BranchDaoTest.class,
+        SendingDaoTest.class
 })
 public class DaoSuiteTest {
 }
