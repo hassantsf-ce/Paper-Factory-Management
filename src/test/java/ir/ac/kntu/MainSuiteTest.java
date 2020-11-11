@@ -1,3 +1,5 @@
+package ir.ac.kntu;
+
 import ir.ac.kntu.controller.ControllerSuitTest;
 import ir.ac.kntu.dao.DaoSuiteTest;
 import ir.ac.kntu.dao.DaoTest;

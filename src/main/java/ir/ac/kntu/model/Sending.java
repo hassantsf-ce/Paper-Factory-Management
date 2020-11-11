@@ -1,8 +1,10 @@
 package ir.ac.kntu.model;
 
+import ir.ac.kntu.view.ViewAsHtml;
+
 import java.util.Objects;
 
-public class Sending {
+public class Sending implements ViewAsHtml {
   private int id;
   private String name;
   private Customer sender;
@@ -150,5 +152,20 @@ public class Sending {
             "\nsendTime: " + sendTime +
             "\nreceiveTime: " + receiveTime +
             "\nmethods: " + methods;
+  }
+
+  @Override
+  public String generateHtml() {
+    return "<tr><td>" + id + "</td>" +
+            "<td>" + name + "</td>" +
+            sender.generateHtml() +
+            receiver.generateHtml() +
+            branch.generateHtml() +
+            origin.generateHtml() +
+            destination.generateHtml() +
+            "<td>" + weight + "Kg</td>" +
+            sendTime.generateHtml() +
+            receiveTime.generateHtml() +
+            methods.generateHtml() + "</tr>";
   }
 }

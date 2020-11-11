@@ -54,6 +54,6 @@ public class City implements ViewAsHtml {
   }
 
   public String generateHtml() {
-    return "<td>City " + name + "(" + state + ")" + "</td>";
+    return "<td>" + name + "(" + state + ")" + "</td>";
   }
 }

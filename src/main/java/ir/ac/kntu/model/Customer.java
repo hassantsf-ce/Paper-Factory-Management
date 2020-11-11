@@ -56,6 +56,6 @@ public class Customer implements ViewAsHtml {
 
   @Override
   public String generateHtml() {
-    return "<td>Customer " + name + "(" + nationalNumber + ")" + "</td>";
+    return "<td>" + name + " #" + nationalNumber + "</td>";
   }
 }

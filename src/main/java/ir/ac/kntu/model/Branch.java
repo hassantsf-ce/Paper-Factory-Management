@@ -67,6 +67,6 @@ public class Branch implements ViewAsHtml {
 
   @Override
   public String generateHtml() {
-    return "<td>Branch " + code + " from " + city.getName() + "</td>";
+    return "<td>" + code + " from " + city.getName() + "</td>";
   }
 }
