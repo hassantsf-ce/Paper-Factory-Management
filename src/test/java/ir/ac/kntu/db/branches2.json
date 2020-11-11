@@ -1,0 +1,26 @@
+[
+  {
+    "code": "3387",
+    "city": {
+      "name": "Tehran",
+      "state": "Varamin"
+    },
+    "personnelNumbers": 13
+  },
+  {
+    "code": "9823",
+    "city": {
+      "name": "Los Angles",
+      "state": "California"
+    },
+    "personnelNumbers": 814
+  },
+  {
+    "code": "9893",
+    "city": {
+      "name": "Chicago",
+      "state": "Illinois"
+    },
+    "personnelNumbers": 613
+  }
+]
