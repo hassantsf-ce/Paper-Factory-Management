@@ -3,6 +3,7 @@ package ir.ac.kntu.dao;
 import ir.ac.kntu.enums.PostType;
 import ir.ac.kntu.enums.SendMethod;
 import ir.ac.kntu.enums.SendingStatus;
+import ir.ac.kntu.exceptions.ItemNotFoundException;
 import ir.ac.kntu.model.*;
 import ir.ac.kntu.util.JalaliCalendar;
 import org.junit.Before;
@@ -94,7 +95,12 @@ public class SendingDaoTest extends DaoTest<Sending> {
             methods
     );
     dao.setDb(new File(jsonTests[0]));
-    Sending actual = dao.getItem("1");
+    Sending actual = null;
+    try {
+      actual = dao.getItem("1");
+    } catch (ItemNotFoundException e) {
+      e.printStackTrace();
+    }
     assertEquals(expected, actual);
 
     // Test 2
@@ -114,7 +120,11 @@ public class SendingDaoTest extends DaoTest<Sending> {
             methods
     );
     dao.setDb(new File(jsonTests[0]));
-    actual = dao.getItem("2");
+    try {
+      actual = dao.getItem("2");
+    } catch (ItemNotFoundException e) {
+      e.printStackTrace();
+    }
     assertEquals(expected, actual);
   }
 
@@ -160,7 +170,12 @@ public class SendingDaoTest extends DaoTest<Sending> {
     expectedSending.add(sending2);
 
     dao.setDb(new File(jsonTests[0]));
-    List<Sending> actualSending = dao.getItems();
+    List<Sending> actualSending = null;
+    try {
+      actualSending = dao.getItems();
+    } catch (ItemNotFoundException e) {
+      e.printStackTrace();
+    }
     assertEquals(expectedSending, actualSending);
   }
 }

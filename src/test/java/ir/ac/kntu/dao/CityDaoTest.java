@@ -1,5 +1,6 @@
 package ir.ac.kntu.dao;
 
+import ir.ac.kntu.exceptions.ItemNotFoundException;
 import ir.ac.kntu.model.City;
 import org.junit.Before;
 import org.junit.Test;
@@ -66,20 +67,33 @@ public class CityDaoTest extends DaoTest<City> {
 
     City expected = new City("Los Angles", "California");
     dao.setDb(new File(jsonTests[1]));
-    City actual = dao.getItem("Los Angles");
+    City actual = null;
+    try {
+      actual = dao.getItem("Los Angles");
+    } catch (ItemNotFoundException e) {
+      e.printStackTrace();
+    }
     assertEquals(expected, actual);
 
     // Test 2
     expected = new City("Chicago", "Illinois");
     dao.setDb(new File(jsonTests[1]));
-    actual = dao.getItem("chicago");
+    try {
+      actual = dao.getItem("chicago");
+    } catch (ItemNotFoundException e) {
+      e.printStackTrace();
+    }
     // Test for case insensitivity
     assertEquals(expected, actual);
 
     // Test 3
     expected = new City("Tehran", "Tehran");
     dao.setDb(new File(jsonTests[0]));
-    actual = dao.getItem("Tehran");
+    try {
+      actual = dao.getItem("Tehran");
+    } catch (ItemNotFoundException e) {
+      e.printStackTrace();
+    }
     assertEquals(expected, actual);
   }
 
@@ -99,7 +113,12 @@ public class CityDaoTest extends DaoTest<City> {
     expectedCities.add(city3);
 
     dao.setDb(new File(jsonTests[0]));
-    List<City> actualCities = dao.getItems();
+    List<City> actualCities = null;
+    try {
+      actualCities = dao.getItems();
+    } catch (ItemNotFoundException e) {
+      e.printStackTrace();
+    }
     assertEquals(expectedCities, actualCities);
 
     // Test 2
@@ -112,7 +131,11 @@ public class CityDaoTest extends DaoTest<City> {
     expectedCities.add(city3);
 
     dao.setDb(new File(jsonTests[1]));
-    actualCities = dao.getItems();
+    try {
+      actualCities = dao.getItems();
+    } catch (ItemNotFoundException e) {
+      e.printStackTrace();
+    }
     assertEquals(expectedCities, actualCities);
   }
 }

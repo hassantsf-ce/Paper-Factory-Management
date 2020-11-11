@@ -1,6 +1,7 @@
 package ir.ac.kntu.dao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ir.ac.kntu.exceptions.ItemNotFoundException;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,7 +35,7 @@ abstract class Dao<T> {
     }
   }
 
-  abstract List<T> getItems();
-  abstract T getItem(String id);
+  abstract List<T> getItems() throws ItemNotFoundException;
+  abstract T getItem(String id) throws ItemNotFoundException;
   abstract T deleteItem(String id);
 }

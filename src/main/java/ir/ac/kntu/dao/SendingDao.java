@@ -1,6 +1,7 @@
 package ir.ac.kntu.dao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ir.ac.kntu.exceptions.ItemNotFoundException;
 import ir.ac.kntu.model.Sending;
 
 import java.io.File;
@@ -16,11 +17,15 @@ public class SendingDao extends Dao<Sending> {
   }
 
   @Override
-  public List<Sending> getItems() {
+  public List<Sending> getItems() throws ItemNotFoundException {
     try {
       Sending[] sendingArray = getMapper().readValue(getDb(), Sending[].class);
       List<Sending> sendingList = Arrays.asList(sendingArray);
-      return sendingList;
+      if (sendingList.isEmpty()) {
+        throw new ItemNotFoundException("There is no sending!");
+      } else {
+        return sendingList;
+      }
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -28,15 +33,20 @@ public class SendingDao extends Dao<Sending> {
   }
 
   @Override
-  public Sending getItem(String stringId) {
+  public Sending getItem(String stringId) throws ItemNotFoundException {
+    Sending result = null;
     int id = Integer.parseInt(stringId);
     for (Sending sending :
             this.getItems()) {
       if (sending.getId() == id) {
-        return sending;
+        result = sending;
       }
     }
-    return null;
+    if (result == null) {
+      throw new ItemNotFoundException("There is no sending with " + id + " name");
+    } else {
+      return result;
+    }
   }
 
   @Override

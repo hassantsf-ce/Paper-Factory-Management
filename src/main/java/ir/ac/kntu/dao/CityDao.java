@@ -1,6 +1,7 @@
 package ir.ac.kntu.dao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ir.ac.kntu.exceptions.ItemNotFoundException;
 import ir.ac.kntu.model.City;
 
 import java.io.File;
@@ -16,27 +17,38 @@ public class CityDao extends Dao<City> {
   }
 
   @Override
-  public List<City> getItems() {
+  public List<City> getItems() throws ItemNotFoundException {
     try {
       City[] citiesArray = getMapper().readValue(getDb(), City[].class);
-      List<City> sendingList = Arrays.asList(citiesArray);
-      return sendingList;
+      List<City> citiesList = Arrays.asList(citiesArray);
+      if (citiesList.isEmpty()) {
+        throw new ItemNotFoundException("There is no city!");
+      } else {
+        return citiesList;
+      }
     } catch (IOException e) {
       e.printStackTrace();
     }
+
     return null;
   }
 
   @Override
-  public City getItem(String cityName) {
-    for (City sending :
+  public City getItem(String cityName) throws ItemNotFoundException {
+    City result = null;
+    for (City city :
             this.getItems()) {
-      boolean condition = sending.getName().toLowerCase().equals(cityName.toLowerCase());
+      boolean condition = city.getName().toLowerCase().equals(cityName.toLowerCase());
       if (condition) {
-        return sending;
+        result = city;
       }
     }
-    return null;
+
+    if (result == null) {
+      throw new ItemNotFoundException("There is no city with " + cityName + " name");
+    } else {
+      return result;
+    }
   }
 
   @Override

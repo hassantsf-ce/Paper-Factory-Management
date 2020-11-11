@@ -1,6 +1,7 @@
 package ir.ac.kntu.dao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ir.ac.kntu.exceptions.ItemNotFoundException;
 import ir.ac.kntu.model.Branch;
 
 import java.io.File;
@@ -16,11 +17,15 @@ public class BranchDao extends Dao<Branch> {
   }
 
   @Override
-  public List<Branch> getItems() {
+  public List<Branch> getItems() throws ItemNotFoundException {
     try {
       Branch[] customersArray = getMapper().readValue(getDb(), Branch[].class);
-      List<Branch> sendingList = Arrays.asList(customersArray);
-      return sendingList;
+      List<Branch> branchesList = Arrays.asList(customersArray);
+      if (branchesList.isEmpty()) {
+        throw new ItemNotFoundException("There is no branch!");
+      } else {
+        return branchesList;
+      }
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -28,14 +33,20 @@ public class BranchDao extends Dao<Branch> {
   }
 
   @Override
-  public Branch getItem(String branchCode) {
+  public Branch getItem(String branchCode) throws ItemNotFoundException {
+    Branch result = null;
     for (Branch branch :
             this.getItems()) {
       if (branch.getCode().equals(branchCode)) {
-        return branch;
+        result = branch;
       }
     }
-    return null;
+
+    if (result == null) {
+      throw new ItemNotFoundException("There is no branch with " + branchCode + " code");
+    } else {
+      return result;
+    }
   }
 
   @Override

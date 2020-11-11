@@ -1,5 +1,6 @@
 package ir.ac.kntu.dao;
 
+import ir.ac.kntu.exceptions.ItemNotFoundException;
 import ir.ac.kntu.model.Customer;
 import org.junit.Before;
 import org.junit.Test;
@@ -60,8 +61,8 @@ public abstract class DaoTest<T> {
   public abstract void updateItemsTest();
 
   @Test
-  public abstract void getItemTest();
+  public abstract void getItemTest() throws ItemNotFoundException;
 
   @Test
-  public abstract void getItemsTest();
+  public abstract void getItemsTest() throws ItemNotFoundException;
 }

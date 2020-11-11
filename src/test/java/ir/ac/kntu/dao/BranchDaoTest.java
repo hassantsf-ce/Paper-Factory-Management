@@ -1,5 +1,6 @@
 package ir.ac.kntu.dao;
 
+import ir.ac.kntu.exceptions.ItemNotFoundException;
 import ir.ac.kntu.model.Branch;
 import ir.ac.kntu.model.City;
 import org.junit.Before;
@@ -66,7 +67,7 @@ public class BranchDaoTest extends DaoTest<Branch> {
   }
 
   @Test
-  public void getItemTest() {
+  public void getItemTest() throws ItemNotFoundException {
     Dao<Branch> dao = getDao();
     String[] jsonTests = getJsonTests();
 
@@ -91,7 +92,7 @@ public class BranchDaoTest extends DaoTest<Branch> {
   }
 
   @Test
-  public void getItemsTest() {
+  public void getItemsTest() throws ItemNotFoundException {
     Dao<Branch> dao = getDao();
     String[] jsonTests = getJsonTests();
 

@@ -1,5 +1,6 @@
 package ir.ac.kntu.dao;
 
+import ir.ac.kntu.exceptions.ItemNotFoundException;
 import ir.ac.kntu.model.Customer;
 import org.junit.Before;
 import org.junit.Test;
@@ -56,7 +57,7 @@ public class CustomerDaoTest extends DaoTest<Customer> {
   }
 
   @Test
-  public void getItemTest() {
+  public void getItemTest() throws ItemNotFoundException {
     Dao<Customer> dao = getDao();
     String[] jsonTests = getJsonTests();
 
@@ -80,7 +81,7 @@ public class CustomerDaoTest extends DaoTest<Customer> {
   }
 
   @Test
-  public void getItemsTest() {
+  public void getItemsTest() throws ItemNotFoundException {
     Dao<Customer> dao = getDao();
     String[] jsonTests = getJsonTests();
     // Test 1

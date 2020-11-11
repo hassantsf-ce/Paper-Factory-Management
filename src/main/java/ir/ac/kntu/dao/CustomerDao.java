@@ -1,6 +1,7 @@
 package ir.ac.kntu.dao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ir.ac.kntu.exceptions.ItemNotFoundException;
 import ir.ac.kntu.model.Customer;
 
 import java.io.File;
@@ -16,11 +17,15 @@ public class CustomerDao extends Dao<Customer> {
   }
 
   @Override
-  public List<Customer> getItems() {
+  public List<Customer> getItems() throws ItemNotFoundException {
     try {
       Customer[] customersArray = getMapper().readValue(getDb(), Customer[].class);
-      List<Customer> sendingList = Arrays.asList(customersArray);
-      return sendingList;
+      List<Customer> customersList = Arrays.asList(customersArray);
+      if (customersList.isEmpty()) {
+        throw new ItemNotFoundException("There is no customer!");
+      } else {
+        return customersList;
+      }
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -28,14 +33,20 @@ public class CustomerDao extends Dao<Customer> {
   }
 
   @Override
-  public Customer getItem(String nationalNumber) {
-    for (Customer sending :
+  public Customer getItem(String nationalNumber) throws ItemNotFoundException {
+    Customer result = null;
+    for (Customer customer :
             this.getItems()) {
-      if (sending.getNationalNumber().equals(nationalNumber)) {
-        return sending;
+      if (customer.getNationalNumber().equals(nationalNumber)) {
+        result = customer;
       }
     }
-    return null;
+
+    if (result == null) {
+      throw new ItemNotFoundException("There is no customer with " + nationalNumber + " number");
+    } else {
+      return result;
+    }
   }
 
   @Override
