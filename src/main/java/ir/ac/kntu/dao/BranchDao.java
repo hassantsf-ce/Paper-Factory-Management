@@ -29,10 +29,10 @@ public class BranchDao extends Dao<Branch> {
 
   @Override
   public Branch getItem(String branchCode) {
-    for (Branch sending :
+    for (Branch branch :
             this.getItems()) {
-      if (sending.getCode().equals(branchCode)) {
-        return sending;
+      if (branch.getCode().equals(branchCode)) {
+        return branch;
       }
     }
     return null;
