@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "name": "Qom",
+    "state": "Qom"
+  },
+  {
+    "name": "Tehran",
+    "state": "Tehran"
+  },
+  {
+    "name": "Sari",
+    "state": "Mazandaran"
+  },
+  {
+    "name": "NewYork City",
+    "state": "NewYork"
+  },
+  {
+    "name": "Los Angles",
+    "state": "California"
+  },
+  {
+    "name": "Chicago",
+    "state": "Illinois"
+  }
+]

@@ -21,8 +21,20 @@ public class Sending implements ViewAsHtml {
   public Sending() {
   }
 
+  public Sending(String name, Customer sender, Customer receiver, Branch branch, City origin, City destination, double weight, DateModel sendTime, DateModel receiveTime, SendingMethods methods) {
+    this.name = name;
+    this.sender = sender;
+    this.receiver = receiver;
+    this.branch = branch;
+    this.origin = origin;
+    this.destination = destination;
+    this.weight = weight;
+    this.sendTime = sendTime;
+    this.receiveTime = receiveTime;
+    this.methods = methods;
+  }
+
   public Sending(int id, String name, Customer sender, Customer receiver, Branch branch, City origin, City destination, double weight, DateModel sendTime, DateModel receiveTime, SendingMethods methods) {
-    this.id = id;
     this.name = name;
     this.sender = sender;
     this.receiver = receiver;
