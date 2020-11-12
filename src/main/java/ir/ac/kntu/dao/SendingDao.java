@@ -2,10 +2,12 @@ package ir.ac.kntu.dao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.ac.kntu.exceptions.ItemNotFoundException;
+import ir.ac.kntu.model.Branch;
 import ir.ac.kntu.model.Sending;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,6 +16,20 @@ public class SendingDao extends Dao<Sending> {
     String dbPath = "src\\main\\java\\ir\\ac\\kntu\\db\\sending.json";
     setMapper(new ObjectMapper());
     setDb(new File(dbPath));
+  }
+
+  @Override
+  public void addItem(Sending newItem) {
+    List<Sending> sending;
+    try {
+      sending = new ArrayList<>(getItems());
+      sending.add(newItem);
+    } catch (ItemNotFoundException e) {
+      sending = new ArrayList<>();
+      sending.add(newItem);
+    }
+
+    updateItems(sending);
   }
 
   @Override

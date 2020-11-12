@@ -2,10 +2,12 @@ package ir.ac.kntu.dao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.ac.kntu.exceptions.ItemNotFoundException;
+import ir.ac.kntu.model.Branch;
 import ir.ac.kntu.model.Customer;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,6 +16,20 @@ public class CustomerDao extends Dao<Customer> {
     String dbPath = "src\\main\\java\\ir\\ac\\kntu\\db\\customers.json";
     setMapper(new ObjectMapper());
     setDb(new File(dbPath));
+  }
+
+  @Override
+  public void addItem(Customer newItem) {
+    List<Customer> customers;
+    try {
+      customers = new ArrayList<>(getItems());
+      customers.add(newItem);
+    } catch (ItemNotFoundException e) {
+      customers = new ArrayList<>();
+      customers.add(newItem);
+    }
+
+    updateItems(customers);
   }
 
   @Override

@@ -1,5 +1,6 @@
 package ir.ac.kntu.controller;
 
+import ir.ac.kntu.dao.CityDao;
 import ir.ac.kntu.exceptions.CanNotInstantiateException;
 import ir.ac.kntu.model.City;
 import ir.ac.kntu.util.validation.CityValidation;
@@ -23,11 +24,19 @@ public class CityController implements Controller<City> {
       validator.validateString(cityName);
       validator.validateString(cityState);
       validator.validateCityNameAndStateValidation(cityName, cityState);
-      return new City(cityName, cityState);
+      City newCity = new City(cityName, cityState);
+
+      CityDao dao = new CityDao();
+
+      dao.addItem(newCity);
+      return newCity;
     } catch (Exception e) {
+      e.printStackTrace();
       System.out.println(e.getMessage());
-      throw new CanNotInstantiateException("City");
+//      throw new CanNotInstantiateException("City");
     }
+
+    return null;
   }
 
 }

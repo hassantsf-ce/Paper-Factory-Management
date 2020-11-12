@@ -1,5 +1,6 @@
 package ir.ac.kntu.controller;
 
+import ir.ac.kntu.dao.CustomerDao;
 import ir.ac.kntu.exceptions.CanNotInstantiateException;
 import ir.ac.kntu.model.Customer;
 import ir.ac.kntu.util.UserInput;
@@ -25,7 +26,11 @@ public class CustomerController implements Controller<Customer> {
       String customerNationalNumber = input.getLine("national number");
       validator.validateString(customerNationalNumber);
       validator.validateNationalNumber(customerNationalNumber);
-      return new Customer(customerName, customerNationalNumber);
+      Customer newCustomer = new Customer(customerName, customerNationalNumber);
+
+      CustomerDao dao = new CustomerDao();
+      dao.addItem(newCustomer);
+      return newCustomer;
     } catch (Exception e) {
       System.out.println(e.getMessage());
       throw new CanNotInstantiateException("City");

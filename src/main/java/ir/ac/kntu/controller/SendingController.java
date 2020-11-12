@@ -3,6 +3,7 @@ package ir.ac.kntu.controller;
 import ir.ac.kntu.dao.BranchDao;
 import ir.ac.kntu.dao.CityDao;
 import ir.ac.kntu.dao.CustomerDao;
+import ir.ac.kntu.dao.SendingDao;
 import ir.ac.kntu.enums.PostType;
 import ir.ac.kntu.enums.SendMethod;
 import ir.ac.kntu.enums.SendingStatus;
@@ -62,7 +63,7 @@ public class SendingController implements Controller<Sending> {
       userChoice = input.chooseFromList(SendMethod.getStringValues());
       SendMethod sendMethod = SendMethod.values()[userChoice];
       SendingMethods methods = new SendingMethods(type, sendMethod, SendingStatus.STORED);
-      return new Sending(
+      Sending newSending = new Sending(
               sendingName,
               sender,
               receiver,
@@ -74,6 +75,10 @@ public class SendingController implements Controller<Sending> {
               receiveDate.getModel(),
               methods
       );
+
+      SendingDao dao = new SendingDao();
+      dao.addItem(newSending);
+      return newSending;
     } catch (ItemNotFoundException e) {
       System.out.println(e.getMessage());
       throw new CanNotInstantiateException("Sending");

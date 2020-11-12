@@ -6,6 +6,7 @@ import ir.ac.kntu.model.Branch;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,6 +15,20 @@ public class BranchDao extends Dao<Branch> {
     String dbPath = "src\\main\\java\\ir\\ac\\kntu\\db\\branches.json";
     setMapper(new ObjectMapper());
     setDb(new File(dbPath));
+  }
+
+  @Override
+  public void addItem(Branch newItem) {
+    List<Branch> branches;
+    try {
+      branches = new ArrayList<>(getItems());
+      branches.add(newItem);
+    } catch (ItemNotFoundException e) {
+      branches = new ArrayList<>();
+      branches.add(newItem);
+    }
+
+    updateItems(branches);
   }
 
   @Override

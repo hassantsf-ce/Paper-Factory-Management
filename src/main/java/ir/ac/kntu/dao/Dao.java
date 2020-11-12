@@ -35,6 +35,8 @@ abstract class Dao<T> {
     }
   }
 
+  abstract void addItem(T newItem);
+
   abstract List<T> getItems() throws ItemNotFoundException;
   abstract T getItem(String id) throws ItemNotFoundException;
   abstract T deleteItem(String id);

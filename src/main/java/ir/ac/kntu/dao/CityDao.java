@@ -6,6 +6,7 @@ import ir.ac.kntu.model.City;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,6 +15,21 @@ public class CityDao extends Dao<City> {
     String dbPath = "src\\main\\java\\ir\\ac\\kntu\\db\\city.json";
     setMapper(new ObjectMapper());
     setDb(new File(dbPath));
+  }
+
+  @Override
+  public void addItem(City newItem) {
+    List<City> cities;
+
+    try {
+      cities = new ArrayList<>(getItems());
+      cities.add(newItem);
+    } catch (ItemNotFoundException e) {
+      cities = new ArrayList<>();
+      cities.add(newItem);
+    }
+
+    updateItems(cities);
   }
 
   @Override
