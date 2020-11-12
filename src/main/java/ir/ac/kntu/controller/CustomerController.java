@@ -2,6 +2,7 @@ package ir.ac.kntu.controller;
 
 import ir.ac.kntu.dao.CustomerDao;
 import ir.ac.kntu.exceptions.CanNotInstantiateException;
+import ir.ac.kntu.exceptions.ItemNotFoundException;
 import ir.ac.kntu.model.Customer;
 import ir.ac.kntu.util.UserInput;
 import ir.ac.kntu.util.validation.CustomerValidation;
@@ -9,10 +10,12 @@ import ir.ac.kntu.util.validation.CustomerValidation;
 public class CustomerController implements Controller<Customer> {
   private UserInput input;
   private CustomerValidation validator;
+  CustomerDao dao;
 
   public CustomerController() {
     this.input = new UserInput();
     validator = new CustomerValidation();
+    dao = new CustomerDao();
   }
 
   @Override
@@ -27,13 +30,25 @@ public class CustomerController implements Controller<Customer> {
       validator.validateString(customerNationalNumber);
       validator.validateNationalNumber(customerNationalNumber);
       Customer newCustomer = new Customer(customerName, customerNationalNumber);
-
-      CustomerDao dao = new CustomerDao();
       dao.addItem(newCustomer);
       return newCustomer;
     } catch (Exception e) {
       System.out.println(e.getMessage());
       throw new CanNotInstantiateException("City");
     }
+  }
+
+  public Customer getCustomerByNationalNumber(String nationalNumber) throws ItemNotFoundException {
+    return dao.getItem(nationalNumber);
+  }
+
+  public Customer getCustomerByName(String name) throws ItemNotFoundException {
+    for (Customer customer : dao.getItems()) {
+      if (customer.getName().toLowerCase().equalsIgnoreCase(name)) {
+        return customer;
+      }
+    }
+
+    throw new ItemNotFoundException("customer");
   }
 }
