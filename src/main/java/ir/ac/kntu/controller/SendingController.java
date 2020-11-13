@@ -15,16 +15,22 @@ import ir.ac.kntu.util.ScannerWrapper;
 import ir.ac.kntu.util.UserInput;
 import ir.ac.kntu.util.validation.CityValidation;
 import ir.ac.kntu.util.validation.SendingValidation;
+import ir.ac.kntu.view.GenerateTable;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class SendingController implements Controller<Sending> {
   private UserInput input;
   private SendingValidation validator;
+  private SendingDao dao;
 
   public SendingController() {
     this.input = new UserInput();
     validator = new SendingValidation();
+    dao = new SendingDao();
   }
 
   @Override
@@ -83,5 +89,39 @@ public class SendingController implements Controller<Sending> {
       System.out.println(e.getMessage());
       throw new CanNotInstantiateException("Sending");
     }
+  }
+
+  public void filterSendingByStatus(SendingStatus sendingStatus) throws ItemNotFoundException, IOException {
+    ArrayList<Sending> results = new ArrayList<>();
+    dao.getItems().forEach(sending -> {
+      if (sending.getMethods().getStatus().equals(sendingStatus)) {
+        results.add(sending);
+      }
+    });
+
+    GenerateTable generator = new GenerateTable();
+    generator.writeSendingTable(results);
+    generator.showHtml();
+  }
+
+  public void searchWithCity(String option, String cityName) throws ItemNotFoundException, IOException {
+    List<Sending> sending = dao.getItems();
+    ArrayList<Sending> results = new ArrayList<>();
+
+    sending.forEach(s -> {
+      if (option.equals("destination")) {
+        if (s.getDestination().getName().equals(cityName)) {
+          results.add(s);
+        }
+      } else {
+        if (s.getOrigin().getName().equals(cityName)) {
+          results.add(s);
+        }
+      }
+    });
+
+    GenerateTable generator = new GenerateTable();
+    generator.writeSendingTable(results);
+    generator.showHtml();
   }
 }
