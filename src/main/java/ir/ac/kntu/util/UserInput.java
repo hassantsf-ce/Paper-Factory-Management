@@ -1,5 +1,6 @@
 package ir.ac.kntu.util;
 
+import ir.ac.kntu.exceptions.InvalidDateException;
 import ir.ac.kntu.model.DateModel;
 import ir.ac.kntu.model.SendingMethods;
 
@@ -36,15 +37,19 @@ public class UserInput {
     return input;
   }
 
-  public JalaliCalendar getDate(String fieldName) {
+  public JalaliCalendar getDate(String fieldName) throws InvalidDateException {
     System.out.println("Enter " + fieldName + "(yyyy/mm/dd)");
     String input = SCANNER.getLine();
     String[] parts = input.split("[/-]");;
-    int year = Integer.parseInt(parts[0]);
-    int month = Integer.parseInt(parts[1]);
-    int day = Integer.parseInt(parts[2]);
-
-    return new JalaliCalendar(year, month, day);
+    try {
+      int year = Integer.parseInt(parts[0]);
+      int month = Integer.parseInt(parts[1]);
+      int day = Integer.parseInt(parts[2]);
+      return new JalaliCalendar(year, month, day);
+    } catch (NumberFormatException e) {
+      System.out.println("Wrong Format");
+      throw new InvalidDateException("date");
+    }
   }
 
   public int chooseFromList(String[] options) {

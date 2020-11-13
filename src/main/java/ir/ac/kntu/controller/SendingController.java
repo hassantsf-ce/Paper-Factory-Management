@@ -8,6 +8,7 @@ import ir.ac.kntu.enums.PostType;
 import ir.ac.kntu.enums.SendMethod;
 import ir.ac.kntu.enums.SendingStatus;
 import ir.ac.kntu.exceptions.CanNotInstantiateException;
+import ir.ac.kntu.exceptions.InvalidDateException;
 import ir.ac.kntu.exceptions.ItemNotFoundException;
 import ir.ac.kntu.model.*;
 import ir.ac.kntu.util.JalaliCalendar;
@@ -86,7 +87,7 @@ public class SendingController implements Controller<Sending> {
       SendingDao dao = new SendingDao();
       dao.addItem(newSending);
       return newSending;
-    } catch (ItemNotFoundException e) {
+    } catch (ItemNotFoundException | InvalidDateException e) {
       System.out.println(e.getMessage());
       throw new CanNotInstantiateException("Sending");
     }
