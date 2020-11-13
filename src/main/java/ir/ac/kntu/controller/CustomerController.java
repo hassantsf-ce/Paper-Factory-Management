@@ -4,6 +4,7 @@ import ir.ac.kntu.dao.CustomerDao;
 import ir.ac.kntu.exceptions.CanNotInstantiateException;
 import ir.ac.kntu.exceptions.ItemNotFoundException;
 import ir.ac.kntu.model.Customer;
+import ir.ac.kntu.util.ScannerWrapper;
 import ir.ac.kntu.util.UserInput;
 import ir.ac.kntu.util.validation.CustomerValidation;
 
@@ -21,6 +22,7 @@ public class CustomerController implements Controller<Customer> {
   @Override
   public Customer create() throws CanNotInstantiateException {
     System.out.println("-- Create New Customer --");
+    ScannerWrapper.getInstance().getLine();
     try {
       String customerName = input.getLine("name");
       validator.validateString(customerName);

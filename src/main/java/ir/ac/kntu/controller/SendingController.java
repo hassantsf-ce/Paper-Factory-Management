@@ -41,6 +41,7 @@ public class SendingController implements Controller<Sending> {
       CityDao cityDao = new CityDao();
 
       System.out.println("-- Create New Sending --");
+      ScannerWrapper.getInstance().getLine();
       String sendingName = input.getLine("name");
 
       String senderNationalNumber = input.getString("sender national number");

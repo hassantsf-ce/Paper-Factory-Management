@@ -28,7 +28,7 @@ public class Main {
     CustomerController customerController = new CustomerController();
     SendingController sendingController = new SendingController();
 
-    System.out.println("\n\nPost Office");
+    System.out.println("Post Office");
     System.out.println("Choose from options blow:");
     String[] options = {
             "Add City",
@@ -68,7 +68,7 @@ public class Main {
         System.out.println(e.getMessage());
       }
 
-
+      System.out.println("\n");
       choice = input.chooseFromList(options);
     }
   }

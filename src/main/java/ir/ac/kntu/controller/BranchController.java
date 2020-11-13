@@ -1,6 +1,7 @@
 package ir.ac.kntu.controller;
 
 import ir.ac.kntu.dao.BranchDao;
+import ir.ac.kntu.dao.CityDao;
 import ir.ac.kntu.exceptions.CanNotInstantiateException;
 import ir.ac.kntu.model.Branch;
 import ir.ac.kntu.model.City;
@@ -20,12 +21,14 @@ public class BranchController implements Controller<Branch> {
   public Branch create() throws CanNotInstantiateException {
     System.out.println("-- Create New Branch --");
     try {
+      ScannerWrapper.getInstance().getLine();
       String branchCode = input.getString("branch code");
       validator.validateBranchCode(branchCode);
 
       ScannerWrapper.getInstance().getLine();
-      CityController cityController = new CityController();
-      City branchCity = cityController.create();
+      CityDao cityDao = new CityDao();
+      String cityName = input.getString("city name");
+      City branchCity = cityDao.getItem(cityName);
 
       int branchPersonnelNumbers = input.getInt("branch personnel numbers");
       validator.validateNegativeNumber(branchPersonnelNumbers);
