@@ -1,5 +1,6 @@
 package ir.ac.kntu.model;
 
+import ir.ac.kntu.enums.PackageStatus;
 import ir.ac.kntu.view.ViewAsHtml;
 
 import java.util.Objects;
@@ -134,6 +135,10 @@ public class Package implements ViewAsHtml {
 
   public void setMethods(PackageMethods methods) {
     this.methods = methods;
+  }
+
+  public void setStatus(PackageStatus status) {
+    this.methods.setStatus(status);
   }
 
   @Override

@@ -19,6 +19,7 @@ import ir.ac.kntu.view.GenerateTable;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
 
@@ -133,5 +134,38 @@ public class PackageController implements Controller<Package> {
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+  public void updatePackagesStatus() throws ItemNotFoundException, IOException {
+    GregorianCalendar now = new GregorianCalendar();
+    PackageDao dao = new PackageDao();
+
+    List<Package> packages = dao.getItems();
+    for (Package pack: packages) {
+      DateModel model = pack.getSendTime();
+      JalaliCalendar sendTime = new JalaliCalendar(
+              model.getYear(), model.getMonth(),
+              model.getDay()
+      );
+
+      model = pack.getReceiveTime();
+      JalaliCalendar receiveTime = new JalaliCalendar(
+              model.getYear(), model.getMonth(),
+              model.getDay()
+      );
+
+     if (sendTime.toGregorian().before(now)) {
+       pack.setStatus(PackageStatus.POSTED);
+     }
+
+      if (receiveTime.toGregorian().before(now)) {
+        pack.setStatus(PackageStatus.RECEIVED);
+      }
+    }
+
+    dao.updateItems(packages);
+    GenerateTable generator = new GenerateTable();
+    generator.writePackageTable(packages);
+    generator.showHtml();
   }
 }

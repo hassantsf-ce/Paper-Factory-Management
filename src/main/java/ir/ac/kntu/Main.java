@@ -58,6 +58,7 @@ public class Main {
             packageController.create();
             break;
           case 5:
+            packageController.updatePackagesStatus();
             break;
           case 6:
             packageController.logAllPackages();
