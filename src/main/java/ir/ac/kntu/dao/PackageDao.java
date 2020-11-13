@@ -2,8 +2,7 @@ package ir.ac.kntu.dao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.ac.kntu.exceptions.ItemNotFoundException;
-import ir.ac.kntu.model.Branch;
-import ir.ac.kntu.model.Sending;
+import ir.ac.kntu.model.Package;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,16 +10,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SendingDao extends Dao<Sending> {
-  public SendingDao() {
+public class PackageDao extends Dao<Package> {
+  public PackageDao() {
     String dbPath = "src\\main\\java\\ir\\ac\\kntu\\db\\sending.json";
     setMapper(new ObjectMapper());
     setDb(new File(dbPath));
   }
 
   @Override
-  public void addItem(Sending newItem) {
-    List<Sending> sending;
+  public void addItem(Package newItem) {
+    List<Package> sending;
     try {
       sending = new ArrayList<>(getItems());
       sending.add(newItem);
@@ -33,10 +32,10 @@ public class SendingDao extends Dao<Sending> {
   }
 
   @Override
-  public List<Sending> getItems() throws ItemNotFoundException {
+  public List<Package> getItems() throws ItemNotFoundException {
     try {
-      Sending[] sendingArray = getMapper().readValue(getDb(), Sending[].class);
-      List<Sending> sendingList = Arrays.asList(sendingArray);
+      Package[] sendingArray = getMapper().readValue(getDb(), Package[].class);
+      List<Package> sendingList = Arrays.asList(sendingArray);
       if (sendingList.isEmpty()) {
         throw new ItemNotFoundException("There is no sending!");
       } else {
@@ -49,10 +48,10 @@ public class SendingDao extends Dao<Sending> {
   }
 
   @Override
-  public Sending getItem(String stringId) throws ItemNotFoundException {
-    Sending result = null;
+  public Package getItem(String stringId) throws ItemNotFoundException {
+    Package result = null;
     int id = Integer.parseInt(stringId);
-    for (Sending sending :
+    for (Package sending :
             this.getItems()) {
       if (sending.getId() == id) {
         result = sending;
@@ -66,7 +65,7 @@ public class SendingDao extends Dao<Sending> {
   }
 
   @Override
-  public Sending deleteItem(String stringId) {
+  public Package deleteItem(String stringId) {
     return null;
   }
 }

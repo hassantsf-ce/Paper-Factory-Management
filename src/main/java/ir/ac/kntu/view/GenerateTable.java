@@ -1,11 +1,11 @@
 package ir.ac.kntu.view;
 
-import ir.ac.kntu.model.Sending;
 
 import java.awt.Desktop;
 import java.io.*;
 import java.util.List;
 import java.util.Scanner;
+import ir.ac.kntu.model.Package;
 
 public class GenerateTable {
   private File view;
@@ -29,10 +29,10 @@ public class GenerateTable {
     return result.toString();
   }
 
-  public void writeSendingTable(List<Sending> sending) {
+  public void writePackageTable(List<Package> packages) {
     StringBuilder builder = new StringBuilder();
-    sending.forEach(sendingItem -> {
-      builder.append(sendingItem.generateHtml());
+    packages.forEach(p -> {
+      builder.append(p.generateHtml());
     });
     String template = readHtml();
     template = template.replace("%{Insert_Here}%", builder);

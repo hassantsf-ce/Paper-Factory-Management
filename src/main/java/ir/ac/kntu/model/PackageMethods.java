@@ -2,19 +2,19 @@ package ir.ac.kntu.model;
 
 import ir.ac.kntu.enums.PostType;
 import ir.ac.kntu.enums.SendMethod;
-import ir.ac.kntu.enums.SendingStatus;
+import ir.ac.kntu.enums.PackageStatus;
 import ir.ac.kntu.view.ViewAsHtml;
 
-public class SendingMethods implements ViewAsHtml {
+public class PackageMethods implements ViewAsHtml {
   private PostType type;
   private SendMethod method;
-  private SendingStatus status;
+  private PackageStatus status;
 
   // Default Constructor for jackson
-  public SendingMethods() {
+  public PackageMethods() {
   }
 
-  public SendingMethods(PostType type, SendMethod method, SendingStatus status) {
+  public PackageMethods(PostType type, SendMethod method, PackageStatus status) {
     this.type = type;
     this.method = method;
     this.status = status;
@@ -24,7 +24,7 @@ public class SendingMethods implements ViewAsHtml {
     return type;
   }
 
-  public SendingStatus getStatus() {
+  public PackageStatus getStatus() {
     return status;
   }
 
@@ -40,7 +40,7 @@ public class SendingMethods implements ViewAsHtml {
     this.method = method;
   }
 
-  public void setStatus(SendingStatus status) {
+  public void setStatus(PackageStatus status) {
     this.status = status;
   }
 

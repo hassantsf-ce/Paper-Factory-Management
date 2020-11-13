@@ -3,19 +3,18 @@ package ir.ac.kntu.controller;
 import ir.ac.kntu.dao.BranchDao;
 import ir.ac.kntu.dao.CityDao;
 import ir.ac.kntu.dao.CustomerDao;
-import ir.ac.kntu.dao.SendingDao;
+import ir.ac.kntu.dao.PackageDao;
 import ir.ac.kntu.enums.PostType;
 import ir.ac.kntu.enums.SendMethod;
-import ir.ac.kntu.enums.SendingStatus;
+import ir.ac.kntu.enums.PackageStatus;
 import ir.ac.kntu.exceptions.CanNotInstantiateException;
 import ir.ac.kntu.exceptions.InvalidDateException;
 import ir.ac.kntu.exceptions.ItemNotFoundException;
 import ir.ac.kntu.model.*;
+import ir.ac.kntu.model.Package;
 import ir.ac.kntu.util.JalaliCalendar;
 import ir.ac.kntu.util.ScannerWrapper;
 import ir.ac.kntu.util.UserInput;
-import ir.ac.kntu.util.validation.CityValidation;
-import ir.ac.kntu.util.validation.SendingValidation;
 import ir.ac.kntu.view.GenerateTable;
 
 import java.io.IOException;
@@ -23,25 +22,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class SendingController implements Controller<Sending> {
+public class PackageController implements Controller<Package> {
   private UserInput input;
-  private SendingValidation validator;
-  private SendingDao dao;
+  private PackageDao dao;
 
-  public SendingController() {
+  public PackageController() {
     this.input = new UserInput();
-    validator = new SendingValidation();
-    dao = new SendingDao();
+    dao = new PackageDao();
   }
 
   @Override
-  public Sending create() throws CanNotInstantiateException {
+  public Package create() throws CanNotInstantiateException {
     try {
       CustomerDao customerDao = new CustomerDao();
       BranchDao branchDao = new BranchDao();
       CityDao cityDao = new CityDao();
 
-      System.out.println("-- Create New Sending --");
+      System.out.println("-- Create New Package --");
       ScannerWrapper.getInstance().getLine();
       String sendingName = input.getLine("name");
 
@@ -70,8 +67,8 @@ public class SendingController implements Controller<Sending> {
 
       userChoice = input.chooseFromList(SendMethod.getStringValues());
       SendMethod sendMethod = SendMethod.values()[userChoice];
-      SendingMethods methods = new SendingMethods(type, sendMethod, SendingStatus.STORED);
-      Sending newSending = new Sending(
+      PackageMethods methods = new PackageMethods(type, sendMethod, PackageStatus.STORED);
+      Package newPackage = new Package(
               sendingName,
               sender,
               receiver,
@@ -84,17 +81,17 @@ public class SendingController implements Controller<Sending> {
               methods
       );
 
-      SendingDao dao = new SendingDao();
-      dao.addItem(newSending);
-      return newSending;
+      PackageDao dao = new PackageDao();
+      dao.addItem(newPackage);
+      return newPackage;
     } catch (ItemNotFoundException | InvalidDateException e) {
       System.out.println(e.getMessage());
-      throw new CanNotInstantiateException("Sending");
+      throw new CanNotInstantiateException("Package");
     }
   }
 
-  public void filterSendingByStatus(SendingStatus sendingStatus) throws ItemNotFoundException, IOException {
-    ArrayList<Sending> results = new ArrayList<>();
+  public void filterPackageByStatus(PackageStatus sendingStatus) throws ItemNotFoundException, IOException {
+    ArrayList<Package> results = new ArrayList<>();
     dao.getItems().forEach(sending -> {
       if (sending.getMethods().getStatus().equals(sendingStatus)) {
         results.add(sending);
@@ -102,13 +99,13 @@ public class SendingController implements Controller<Sending> {
     });
 
     GenerateTable generator = new GenerateTable();
-    generator.writeSendingTable(results);
+    generator.writePackageTable(results);
     generator.showHtml();
   }
 
   public void getPackagesByCity(String option, String cityName) throws ItemNotFoundException, IOException {
-    List<Sending> sending = dao.getItems();
-    ArrayList<Sending> results = new ArrayList<>();
+    List<Package> sending = dao.getItems();
+    ArrayList<Package> results = new ArrayList<>();
 
     sending.forEach(s -> {
       if (option.equals("destination") && s.getDestination().getName().equals(cityName)) {
@@ -119,7 +116,7 @@ public class SendingController implements Controller<Sending> {
     });
 
     GenerateTable generator = new GenerateTable();
-    generator.writeSendingTable(results);
+    generator.writePackageTable(results);
     generator.showHtml();
   }
 
@@ -127,9 +124,9 @@ public class SendingController implements Controller<Sending> {
   public void logAllPackages() {
     GenerateTable generator = null;
     try {
-      List<Sending> packages = dao.getItems();
+      List<Package> packages = dao.getItems();
       generator = new GenerateTable();
-      generator.writeSendingTable(packages);
+      generator.writePackageTable(packages);
       generator.showHtml();
     } catch (ItemNotFoundException e) {
       System.out.println(e.getMessage());

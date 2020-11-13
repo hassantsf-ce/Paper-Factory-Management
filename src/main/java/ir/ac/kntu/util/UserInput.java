@@ -1,8 +1,6 @@
 package ir.ac.kntu.util;
 
 import ir.ac.kntu.exceptions.InvalidDateException;
-import ir.ac.kntu.model.DateModel;
-import ir.ac.kntu.model.SendingMethods;
 
 public class UserInput {
   private final ScannerWrapper SCANNER = ScannerWrapper.getInstance();

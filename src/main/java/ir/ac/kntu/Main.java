@@ -3,15 +3,10 @@ package ir.ac.kntu;
 import ir.ac.kntu.controller.BranchController;
 import ir.ac.kntu.controller.CityController;
 import ir.ac.kntu.controller.CustomerController;
-import ir.ac.kntu.controller.SendingController;
-import ir.ac.kntu.dao.BranchDao;
-import ir.ac.kntu.dao.CityDao;
-import ir.ac.kntu.dao.CustomerDao;
-import ir.ac.kntu.dao.SendingDao;
-import ir.ac.kntu.enums.SendingStatus;
+import ir.ac.kntu.controller.PackageController;
+import ir.ac.kntu.enums.PackageStatus;
 import ir.ac.kntu.exceptions.CanNotInstantiateException;
 import ir.ac.kntu.exceptions.ItemNotFoundException;
-import ir.ac.kntu.model.Customer;
 import ir.ac.kntu.util.ScannerWrapper;
 import ir.ac.kntu.util.UserInput;
 
@@ -26,7 +21,7 @@ public class Main {
     CityController cityController = new CityController();
     BranchController branchController = new BranchController();
     CustomerController customerController = new CustomerController();
-    SendingController sendingController = new SendingController();
+    PackageController packageController = new PackageController();
 
     System.out.println("Post Office");
     System.out.println("Choose from options blow:");
@@ -34,7 +29,7 @@ public class Main {
             "Add City",
             "Add Customer",
             "Add Branch",
-            "Add Sending",
+            "Add Package",
             "Send Package",
             "Log Packages",
             "Log Package with city",
@@ -60,10 +55,12 @@ public class Main {
             branchController.create();
             break;
           case 4:
-            sendingController.create();
+            packageController.create();
+            break;
+          case 5:
             break;
           case 6:
-            sendingController.logAllPackages();
+            packageController.logAllPackages();
             break;
 
           case 7:
@@ -72,7 +69,7 @@ public class Main {
             String[] cityOptions = {"origin", "destination"};
             int cityChoice = input.chooseFromList(cityOptions);
             System.out.println(cityChoice);
-            sendingController.getPackagesByCity(cityOptions[cityChoice - 1], cityName);
+            packageController.getPackagesByCity(cityOptions[cityChoice - 1], cityName);
             break;
 
           case 8:
@@ -89,10 +86,10 @@ public class Main {
 
           case 10:
             int statusChoice = input.chooseFromList(
-                    SendingStatus.getStringValues()
+                    PackageStatus.getStringValues()
             );
-            sendingController.filterSendingByStatus(
-                    SendingStatus.values()[statusChoice - 1]
+            packageController.filterPackageByStatus(
+                    PackageStatus.values()[statusChoice - 1]
             );
             break;
           default:

@@ -4,7 +4,7 @@ import ir.ac.kntu.view.ViewAsHtml;
 
 import java.util.Objects;
 
-public class Sending implements ViewAsHtml {
+public class Package implements ViewAsHtml {
   private int id;
   private String name;
   private Customer sender;
@@ -15,13 +15,13 @@ public class Sending implements ViewAsHtml {
   private double weight;
   private DateModel sendTime;
   private DateModel receiveTime;
-  private SendingMethods methods;
+  private PackageMethods methods;
 
   // Default Constructor for jackson
-  public Sending() {
+  public Package() {
   }
 
-  public Sending(String name, Customer sender, Customer receiver, Branch branch, City origin, City destination, double weight, DateModel sendTime, DateModel receiveTime, SendingMethods methods) {
+  public Package(String name, Customer sender, Customer receiver, Branch branch, City origin, City destination, double weight, DateModel sendTime, DateModel receiveTime, PackageMethods methods) {
     this.name = name;
     this.sender = sender;
     this.receiver = receiver;
@@ -34,7 +34,7 @@ public class Sending implements ViewAsHtml {
     this.methods = methods;
   }
 
-  public Sending(int id, String name, Customer sender, Customer receiver, Branch branch, City origin, City destination, double weight, DateModel sendTime, DateModel receiveTime, SendingMethods methods) {
+  public Package(int id, String name, Customer sender, Customer receiver, Branch branch, City origin, City destination, double weight, DateModel sendTime, DateModel receiveTime, PackageMethods methods) {
     this.name = name;
     this.sender = sender;
     this.receiver = receiver;
@@ -87,7 +87,7 @@ public class Sending implements ViewAsHtml {
     return receiveTime;
   }
 
-  public SendingMethods getMethods() {
+  public PackageMethods getMethods() {
     return methods;
   }
 
@@ -132,7 +132,7 @@ public class Sending implements ViewAsHtml {
     this.receiveTime = receiveTime;
   }
 
-  public void setMethods(SendingMethods methods) {
+  public void setMethods(PackageMethods methods) {
     this.methods = methods;
   }
 
@@ -140,7 +140,7 @@ public class Sending implements ViewAsHtml {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    Sending sending = (Sending) o;
+    Package sending = (Package) o;
     return id == sending.id &&
             Double.compare(sending.weight, weight) == 0 &&
             Objects.equals(name, sending.name);
@@ -153,7 +153,7 @@ public class Sending implements ViewAsHtml {
 
   @Override
   public String toString() {
-    return "Sending " + id +
+    return "Package " + id +
             "\nname: " + name +
             "\nsender: " + sender +
             "\nreceiver: " + receiver +

@@ -1,6 +1,6 @@
 package ir.ac.kntu.enums;
 
-public enum SendingStatus {
+public enum PackageStatus {
   STORED,
   POSTED,
   RECEIVED;

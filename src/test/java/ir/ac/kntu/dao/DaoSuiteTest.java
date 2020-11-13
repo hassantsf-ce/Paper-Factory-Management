@@ -8,7 +8,7 @@ import org.junit.runners.Suite;
         CityDaoTest.class,
         CustomerDaoTest.class,
         BranchDaoTest.class,
-        SendingDaoTest.class
+        PackageDaoTest.class
 })
 public class DaoSuiteTest {
 }
