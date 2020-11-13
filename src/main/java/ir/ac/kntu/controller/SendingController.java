@@ -106,24 +106,35 @@ public class SendingController implements Controller<Sending> {
     generator.showHtml();
   }
 
-  public void searchWithCity(String option, String cityName) throws ItemNotFoundException, IOException {
+  public void getPackagesByCity(String option, String cityName) throws ItemNotFoundException, IOException {
     List<Sending> sending = dao.getItems();
     ArrayList<Sending> results = new ArrayList<>();
 
     sending.forEach(s -> {
-      if (option.equals("destination")) {
-        if (s.getDestination().getName().equals(cityName)) {
-          results.add(s);
-        }
-      } else {
-        if (s.getOrigin().getName().equals(cityName)) {
-          results.add(s);
-        }
+      if (option.equals("destination") && s.getDestination().getName().equals(cityName)) {
+        results.add(s);
+      } else if (option.equals("origin") && s.getOrigin().getName().equals(cityName)) {
+        results.add(s);
       }
     });
 
     GenerateTable generator = new GenerateTable();
     generator.writeSendingTable(results);
     generator.showHtml();
+  }
+
+
+  public void logAllPackages() {
+    GenerateTable generator = null;
+    try {
+      List<Sending> packages = dao.getItems();
+      generator = new GenerateTable();
+      generator.writeSendingTable(packages);
+      generator.showHtml();
+    } catch (ItemNotFoundException e) {
+      System.out.println(e.getMessage());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }

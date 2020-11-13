@@ -40,7 +40,7 @@ public class Main {
             "Log Package with city",
             "Log Customer with name",
             "Log Customer with national number",
-            "Filter Packages with national number",
+            "Filter Packages with status",
             "Exit"
     };
 
@@ -62,10 +62,45 @@ public class Main {
           case 4:
             sendingController.create();
             break;
+          case 6:
+            sendingController.logAllPackages();
+            break;
+
+          case 7:
+            ScannerWrapper.getInstance().getLine();
+            String cityName = input.getLine("city name");
+            String[] cityOptions = {"origin", "destination"};
+            int cityChoice = input.chooseFromList(cityOptions);
+            System.out.println(cityChoice);
+            sendingController.getPackagesByCity(cityOptions[cityChoice - 1], cityName);
+            break;
+
+          case 8:
+            ScannerWrapper.getInstance().getLine();
+            String customerName = input.getLine("customer name");
+            System.out.println(customerController.getCustomerByName(customerName));
+            break;
+
+          case 9:
+            ScannerWrapper.getInstance().getLine();
+            String customerNationalNumber = input.getLine("customer national number");
+            System.out.println(customerController.getCustomerByNationalNumber(customerNationalNumber));
+            break;
+
+          case 10:
+            int statusChoice = input.chooseFromList(
+                    SendingStatus.getStringValues()
+            );
+            sendingController.filterSendingByStatus(
+                    SendingStatus.values()[statusChoice - 1]
+            );
+            break;
           default:
         }
-      } catch (CanNotInstantiateException e) {
+      } catch (CanNotInstantiateException | ItemNotFoundException e) {
         System.out.println(e.getMessage());
+      } catch (IOException e) {
+        e.printStackTrace();
       }
 
       System.out.println("\n");
